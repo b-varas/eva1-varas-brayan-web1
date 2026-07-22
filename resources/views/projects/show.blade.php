@@ -34,4 +34,6 @@
 
 <p><a href="{{ route('projects.index') }}">Volver al listado</a></p>
 
+
+
 @endsection

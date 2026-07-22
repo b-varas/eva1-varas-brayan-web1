@@ -1,66 +1,105 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Sistema de Gestión de Proyectos — Tech Solutions Group
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Evaluación sumativa Unidad 1 — Framework Web (Laravel 11 / PHP 8.3)
 
-## About Laravel
+Aplicación web para la gestión de proyectos de Tech Solutions, desarrollada como caso de estudio para practicar los conceptos fundamentales de un framework MVC: rutas, controladores, modelos, vistas y componentes reutilizables.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Contenido
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Descripción](#descripción)
+- [Tecnologías](#tecnologías)
+- [Instalación](#instalación)
+- [Rutas disponibles](#rutas-disponibles)
+- [Arquitectura (MVC)](#arquitectura-mvc)
+- [Patrones de diseño utilizados](#patrones-de-diseño-utilizados)
+- [Componente reutilizable: Valor UF del día](#componente-reutilizable-valor-uf-del-día)
+- [Estándares de desarrollo web aplicados](#estándares-de-desarrollo-web-aplicados)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Descripción
 
-## Learning Laravel
+La aplicación permite administrar proyectos (listar, ver, crear, actualizar y eliminar), cumpliendo los siguientes requerimientos:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- CRUD completo de proyectos (id, nombre, fecha de inicio, estado, responsable, monto).
+- Datos estáticos (sin base de datos), definidos directamente en el modelo.
+- Vistas con estilos básicos y mensajes de confirmación tipo pop-up.
+- Componente reutilizable que consume un servicio externo (API de indicadores económicos) para mostrar el valor de la UF del día, con respaldo simulado si el servicio no está disponible.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Tecnologías
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.3
+- Laravel 11
+- Blade (motor de plantillas)
+- JavaScript básico (pop-ups de notificación)
+- CSS propio (sin frameworks externos)
 
-## Laravel Sponsors
+## Instalación
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+git clone <url-del-repositorio>
+cd eva1-varas-brayan-web1
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan serve
+```
 
-### Premium Partners
+Luego visita `http://127.0.0.1:8000/proyectos`.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+> No requiere configurar base de datos: los datos son estáticos y se manejan en sesión.
 
-## Contributing
+## Rutas disponibles
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Acción | Verbo | Ruta | Nombre | Controlador |
+|---|---|---|---|---|
+| Listar proyectos | GET | `/proyectos` | `projects.index` | `index` |
+| Formulario crear | GET | `/proyectos/crear` | `projects.create` | `create` |
+| Guardar proyecto | POST | `/proyectos` | `projects.store` | `store` |
+| Formulario editar | GET | `/proyectos/{id}/editar` | `projects.edit` | `edit` |
+| Actualizar proyecto | PUT | `/proyectos/{id}` | `projects.update` | `update` |
+| Confirmar eliminación | GET | `/proyectos/{id}/eliminar` | `projects.confirmDelete` | `confirmDelete` |
+| Eliminar proyecto | DELETE | `/proyectos/{id}` | `projects.destroy` | `destroy` |
+| Obtener proyecto por id | GET | `/proyectos/{id}` | `projects.show` | `show` |
 
-## Code of Conduct
+Las rutas con parámetro `{id}` están restringidas con `whereNumber()` para aceptar solo valores numéricos, evitando errores por parámetros inválidos.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Arquitectura (MVC)
 
-## Security Vulnerabilities
+- **Modelo (`app/Models/Project.php`)**: contiene los datos estáticos iniciales (hardcodeados) y expone métodos (`all`, `find`, `create`, `update`, `delete`) para manipularlos. No usa Eloquent ni base de datos. Para que el CRUD sea demostrable entre distintas peticiones HTTP, el set estático se copia una única vez a la sesión del usuario y desde ahí se lee/escribe.
+- **Controlador (`app/Http/Controllers/ProjectController.php`)**: recibe las peticiones HTTP, valida los datos de entrada y coordina la comunicación entre el modelo y las vistas.
+- **Vistas (`resources/views/projects/*.blade.php`)**: se encargan exclusivamente de la presentación, heredando una estructura común desde `layouts/app.blade.php`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Patrones de diseño utilizados
 
-## License
+| Patrón | Dónde se aplica |
+|---|---|
+| MVC (Model-View-Controller) | Estructura general del proyecto |
+| Front Controller / Router | `routes/web.php` distribuye cada petición al controlador correspondiente |
+| Inyección de dependencias | `UfWidget` recibe `UfService` automáticamente vía el constructor |
+| Service Layer | `UfService` aísla la lógica de consumo de la API externa |
+| Component Pattern | `<x-uf-widget />`, componente Blade reutilizable en todas las vistas |
+| Template Method | `layouts/app.blade.php` con `@yield`, completado por cada vista hija |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Componente reutilizable: Valor UF del día
+
+`app/Services/UfService.php` consulta la API pública `mindicador.cl`. Si el servicio no responde (sin conexión, timeout, error del servidor), se entrega automáticamente un valor simulado, evitando que la aplicación falle.
+
+`app/View/Components/UfWidget.php` expone este servicio como componente Blade:
+
+```blade
+<x-uf-widget />
+```
+
+Se incluye una única vez en el layout compartido, por lo que aparece en todas las vistas del módulo sin duplicar código.
+
+## Estándares de desarrollo web aplicados
+
+- Verbos HTTP semánticos (GET, POST, PUT, DELETE) mediante `@method()` en los formularios.
+- Protección CSRF (`@csrf`) en todos los formularios.
+- Validación server-side (`$request->validate()`).
+- Rutas nombradas (`route()`) en lugar de URLs escritas manualmente.
+- Separación de responsabilidades entre modelo, controlador, vista y servicio.
+- Mensajes de retroalimentación al usuario (éxito / error) mediante flash messages y notificaciones tipo pop-up.
+
+---
+
+Desarrollado por Brayan Varas — Evaluación Sumativa Unidad 1, Desarrollo Web con Framework.

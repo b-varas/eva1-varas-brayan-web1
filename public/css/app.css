@@ -26,3 +26,23 @@ table thead {
     background-color: #2b5797;
     color: white;
 }
+
+.popup {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.popup-success {
+    background-color: #2e7d32;
+}
+
+.popup-error {
+    background-color: #c0392b;
+}

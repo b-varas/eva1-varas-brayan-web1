@@ -2,15 +2,13 @@
 
 @section('contenido')
 
-@if (session('success'))
-<p style="color: green;">{{ session('success') }}</p>
-@endif
-
-@if (session('error'))
-<p style="color: red;">{{ session('error') }}</p>
-@endif
 
 <h1>Listado de proyectos</h1>
+
+<p>
+    
+    <a href="{{ route('projects.create') }}">Agregar proyecto</a>
+</p>
 
 <table>
     <thead>
@@ -25,6 +23,7 @@
         </tr>
     </thead>
     <tbody>
+        
         @foreach ($proyectos as $proyecto)
         <tr>
             <td>{{ $proyecto['id'] }}</td>
