@@ -22,4 +22,16 @@ class ProjectController extends Controller
 
         return view('projects.index', ['proyectos' => $proyectos]);
     }
+
+        // Requerimiento 5: Obtener un proyecto por su id
+    public function show(int $id)
+    {
+        $proyecto = Project::find($id);
+
+        if (!$proyecto) {
+            return redirect()->route('projects.index')->with('error', "No existe un proyecto con id {$id}.");
+        }
+
+        return view('projects.show', ['proyecto' => $proyecto]);
+    }
 }
