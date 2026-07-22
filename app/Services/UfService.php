@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Services;
+
 use Illuminate\Support\Facades\Http;
 
 class UfService
 {
     protected string $endpoint = 'https://mindicador.cl/api/uf';
 
-        public function obtenerValorUf(): array
+    public function obtenerValorUf(): array
     {
         try {
             $response = Http::timeout(3)->get($this->endpoint);
@@ -30,14 +31,12 @@ class UfService
         return $this->valorSimulado();
     }
 
-        protected function valorSimulado(): array
+    protected function valorSimulado(): array
     {
         return [
             'valor' => round(38000 + (mt_rand(-1500, 1500) / 10), 2),
             'fecha' => now()->toDateString(),
             'origen' => 'Simulación local (servicio externo no disponible)',
         ];
-}
-
-
+    }
 }

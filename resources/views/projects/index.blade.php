@@ -6,6 +6,7 @@
 @if (session('error'))
     <p style="color: red;">{{ session('error') }}</p>
 @endif
+<x-uf-widget />
 
 {{-- Vista que muestra la tabla con todos los proyectos (requerimiento 1) --}}
 <h1>Listado de proyectos</h1>
