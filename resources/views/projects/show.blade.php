@@ -1,3 +1,4 @@
+
 {{-- Vista que muestra el detalle de un solo proyecto (requerimiento 5) --}}
 
 <h1>Detalle del proyecto</h1>

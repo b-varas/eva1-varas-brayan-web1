@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 
 
 
+
 class ProjectController extends Controller
 {
     /**
@@ -34,4 +35,27 @@ class ProjectController extends Controller
 
         return view('projects.show', ['proyecto' => $proyecto]);
     }
+
+            // Requerimiento 2 (parte 1): Muestra el formulario vacío para crear un proyecto
+    public function create()
+    {
+        return view('projects.create');
+    }
+
+        // Requerimiento 2 (parte 2): Procesa el formulario y crea el proyecto
+    public function store(Request $request)
+    {
+        $validado = $request->validate([
+            'nombre' => 'required|string|max:150',
+            'fecha_inicio' => 'required|date',
+            'estado' => 'required|string|max:50',
+            'responsable' => 'required|string|max:150',
+            'monto' => 'required|numeric|min:0',
+        ]);
+
+        Project::create($validado);
+
+        return redirect()->route('projects.index')->with('success', 'Proyecto creado correctamente.');
+    }
+
 }
