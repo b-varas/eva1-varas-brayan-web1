@@ -92,4 +92,20 @@ class Project
 
         return $proyectos[$id];
     }
+
+        // Requerimiento 3: Elimina un proyecto por su id
+    public static function delete(int $id): bool
+    {
+        $proyectos = self::todos();
+
+        if (!isset($proyectos[$id])) {
+            return false;
+        }
+
+        unset($proyectos[$id]);
+
+        Session::put(self::SESSION_KEY, $proyectos);
+
+        return true;
+    }
 }

@@ -88,4 +88,28 @@ class ProjectController extends Controller
 
         return redirect()->route('projects.index')->with('success', 'Proyecto actualizado correctamente.');
     }
+
+        // Requerimiento 3 (parte 1): Muestra la confirmación antes de eliminar
+    public function confirmDelete(int $id)
+    {
+        $proyecto = Project::find($id);
+
+        if (!$proyecto) {
+            return redirect()->route('projects.index')->with('error', "No existe un proyecto con id {$id}.");
+        }
+
+        return view('projects.delete', ['proyecto' => $proyecto]);
+    }
+
+    // Requerimiento 3 (parte 2): Elimina el proyecto por su id
+    public function destroy(int $id)
+    {
+        $eliminado = Project::delete($id);
+
+        return redirect()->route('projects.index')->with(
+            $eliminado ? 'success' : 'error',
+            $eliminado ? 'Proyecto eliminado correctamente.' : "No existe un proyecto con id {$id}."
+        );
+    }
+
 }
