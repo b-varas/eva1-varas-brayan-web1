@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('contenido')
+
 {{-- Formulario para crear un nuevo proyecto (requerimiento 2) --}}
 
 <h1>Agregar proyecto</h1>
@@ -28,3 +32,5 @@
 </form>
 
 <p><a href="{{ route('projects.index') }}">Cancelar y volver al listado</a></p>
+
+@endsection

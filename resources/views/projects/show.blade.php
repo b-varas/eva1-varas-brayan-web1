@@ -1,9 +1,11 @@
+@extends('layouts.app')
 
+@section('contenido')
 {{-- Vista que muestra el detalle de un solo proyecto (requerimiento 5) --}}
 
 <h1>Detalle del proyecto</h1>
 
-<table border="1" cellpadding="8">
+<table>
     <tr>
         <th>ID</th>
         <td>{{ $proyecto['id'] }}</td>
@@ -31,3 +33,5 @@
 </table>
 
 <p><a href="{{ route('projects.index') }}">Volver al listado</a></p>
+
+@endsection

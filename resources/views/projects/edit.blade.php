@@ -1,3 +1,8 @@
+@extends('layouts.app')
+
+@section('contenido')
+
+
 {{-- Formulario para editar un proyecto existente (requerimiento 4) --}}
 
 <h1>Editar proyecto #{{ $proyecto['id'] }}</h1>
@@ -29,3 +34,5 @@
 </form>
 
 <p><a href="{{ route('projects.index') }}">Cancelar y volver al listado</a></p>
+
+@endsection

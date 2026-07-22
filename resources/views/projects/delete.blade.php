@@ -1,3 +1,7 @@
+@extends('layouts.app')
+
+@section('contenido')
+
 {{-- Vista de confirmación antes de eliminar un proyecto (requerimiento 3) --}}
 
 <h1>Eliminar proyecto</h1>
@@ -16,3 +20,5 @@
 </form>
 
 <p><a href="{{ route('projects.index') }}">Cancelar y volver al listado</a></p>
+
+@endsection
