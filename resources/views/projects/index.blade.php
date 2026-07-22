@@ -2,8 +2,6 @@
 
 @section('contenido')
 
-<x-uf-widget />
-
 @if (session('success'))
 <p style="color: green;">{{ session('success') }}</p>
 @endif

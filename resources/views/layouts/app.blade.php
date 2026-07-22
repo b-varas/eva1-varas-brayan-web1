@@ -7,6 +7,8 @@
 </head>
 <body>
 
+    <x-uf-widget />
+
     @yield('contenido')
 
 </body>
