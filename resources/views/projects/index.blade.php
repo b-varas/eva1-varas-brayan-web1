@@ -20,10 +20,10 @@
             <th>Estado</th>
             <th>Responsable</th>
             <th>Monto</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-        {{-- Recorre cada proyecto del array y genera una fila por cada uno --}}
         @foreach ($proyectos as $proyecto)
             <tr>
                 <td>{{ $proyecto['id'] }}</td>
@@ -32,6 +32,13 @@
                 <td>{{ $proyecto['estado'] }}</td>
                 <td>{{ $proyecto['responsable'] }}</td>
                 <td>{{ $proyecto['monto'] }}</td>
+                <td>
+                    <a href="{{ route('projects.show', $proyecto['id']) }}">Ver</a>
+                    |
+                    <a href="{{ route('projects.edit', $proyecto['id']) }}">Editar</a>
+                    |
+                    <a href="{{ route('projects.confirmDelete', $proyecto['id']) }}">Eliminar</a>
+                </td>
             </tr>
         @endforeach
     </tbody>
