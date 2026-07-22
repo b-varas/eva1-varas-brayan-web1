@@ -1,6 +1,12 @@
 
+
+
 {{-- Vista que muestra la tabla con todos los proyectos (requerimiento 1) --}}
 <h1>Listado de proyectos</h1>
+
+@if (session('error'))
+    <p style="color: red;">{{ session('error') }}</p>
+@endif
 
 <table border="1" cellpadding="8">
     <thead>
@@ -27,3 +33,4 @@
         @endforeach
     </tbody>
 </table>
+
