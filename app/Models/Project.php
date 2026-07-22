@@ -33,4 +33,10 @@ class Project
     {
         return self::$proyectos;
     }
+
+        // Busca un proyecto por su id (requerimiento 5: obtener un proyecto por su id)
+    public static function find(int $id): ?array
+    {
+        return self::$proyectos[$id] ?? null;
+    }
 }

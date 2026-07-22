@@ -9,3 +9,6 @@ Route::get('/', function () {
 
 // Requerimiento 1: Listar todos los proyectos
 Route::get('/proyectos', [ProjectController::class, 'index'])->name('projects.index');
+
+// Requerimiento 5: Obtener un proyecto por su id
+Route::get('/proyectos/{id}', [ProjectController::class, 'show'])->name('projects.show');
