@@ -1,18 +1,20 @@
+@extends('layouts.app')
+
+@section('contenido')
+
+<x-uf-widget />
 
 @if (session('success'))
-    <p style="color: green;">{{ session('success') }}</p>
+<p style="color: green;">{{ session('success') }}</p>
 @endif
 
 @if (session('error'))
-    <p style="color: red;">{{ session('error') }}</p>
+<p style="color: red;">{{ session('error') }}</p>
 @endif
-<x-uf-widget />
 
-{{-- Vista que muestra la tabla con todos los proyectos (requerimiento 1) --}}
 <h1>Listado de proyectos</h1>
 
-
-<table border="1" cellpadding="8">
+<table>
     <thead>
         <tr>
             <th>ID</th>
@@ -26,22 +28,23 @@
     </thead>
     <tbody>
         @foreach ($proyectos as $proyecto)
-            <tr>
-                <td>{{ $proyecto['id'] }}</td>
-                <td>{{ $proyecto['nombre'] }}</td>
-                <td>{{ $proyecto['fecha_inicio'] }}</td>
-                <td>{{ $proyecto['estado'] }}</td>
-                <td>{{ $proyecto['responsable'] }}</td>
-                <td>{{ $proyecto['monto'] }}</td>
-                <td>
-                    <a href="{{ route('projects.show', $proyecto['id']) }}">Ver</a>
-                    |
-                    <a href="{{ route('projects.edit', $proyecto['id']) }}">Editar</a>
-                    |
-                    <a href="{{ route('projects.confirmDelete', $proyecto['id']) }}">Eliminar</a>
-                </td>
-            </tr>
+        <tr>
+            <td>{{ $proyecto['id'] }}</td>
+            <td>{{ $proyecto['nombre'] }}</td>
+            <td>{{ $proyecto['fecha_inicio'] }}</td>
+            <td>{{ $proyecto['estado'] }}</td>
+            <td>{{ $proyecto['responsable'] }}</td>
+            <td>{{ $proyecto['monto'] }}</td>
+            <td>
+                <a href="{{ route('projects.show', $proyecto['id']) }}">Ver</a>
+                |
+                <a href="{{ route('projects.edit', $proyecto['id']) }}">Editar</a>
+                |
+                <a href="{{ route('projects.confirmDelete', $proyecto['id']) }}">Eliminar</a>
+            </td>
+        </tr>
         @endforeach
     </tbody>
 </table>
 
+@endsection
