@@ -1,12 +1,15 @@
 
-
-
-{{-- Vista que muestra la tabla con todos los proyectos (requerimiento 1) --}}
-<h1>Listado de proyectos</h1>
+@if (session('success'))
+    <p style="color: green;">{{ session('success') }}</p>
+@endif
 
 @if (session('error'))
     <p style="color: red;">{{ session('error') }}</p>
 @endif
+
+{{-- Vista que muestra la tabla con todos los proyectos (requerimiento 1) --}}
+<h1>Listado de proyectos</h1>
+
 
 <table border="1" cellpadding="8">
     <thead>

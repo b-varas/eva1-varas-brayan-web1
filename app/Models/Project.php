@@ -76,4 +76,20 @@ class Project
 
         return $data;
     }
+
+    // Requerimiento 4: Actualiza un proyecto existente por su id
+    public static function update(int $id, array $data): ?array
+    {
+        $proyectos = self::todos();
+
+        if (!isset($proyectos[$id])) {
+            return null;
+        }
+
+        $proyectos[$id] = array_merge($proyectos[$id], $data);
+
+        Session::put(self::SESSION_KEY, $proyectos);
+
+        return $proyectos[$id];
+    }
 }

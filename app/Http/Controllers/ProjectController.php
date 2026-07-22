@@ -1,15 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 /**
  * Controlador encargado de gestionar los proyectos.
  * Conecta las rutas con el modelo Project y con las vistas.
  */
+
 use App\Models\Project;
 use Illuminate\Http\Request;
-
-
-
 
 class ProjectController extends Controller
 {
@@ -17,14 +16,14 @@ class ProjectController extends Controller
      * Requerimiento 1: Listar todos los proyectos.
      * Pide los datos al modelo y se los entrega a la vista.
      */
-        public function index()
+    public function index()
     {
         $proyectos = Project::all();
 
         return view('projects.index', ['proyectos' => $proyectos]);
     }
 
-        // Requerimiento 5: Obtener un proyecto por su id
+    // Requerimiento 5: Obtener un proyecto por su id
     public function show(int $id)
     {
         $proyecto = Project::find($id);
@@ -36,13 +35,13 @@ class ProjectController extends Controller
         return view('projects.show', ['proyecto' => $proyecto]);
     }
 
-            // Requerimiento 2 (parte 1): Muestra el formulario vacío para crear un proyecto
+    // Requerimiento 2 (parte 1): Muestra el formulario vacío para crear un proyecto
     public function create()
     {
         return view('projects.create');
     }
 
-        // Requerimiento 2 (parte 2): Procesa el formulario y crea el proyecto
+    // Requerimiento 2 (parte 2): Procesa el formulario y crea el proyecto
     public function store(Request $request)
     {
         $validado = $request->validate([
@@ -58,4 +57,35 @@ class ProjectController extends Controller
         return redirect()->route('projects.index')->with('success', 'Proyecto creado correctamente.');
     }
 
+    // Requerimiento 4 (parte 1): Muestra el formulario con los datos del proyecto a editar
+    public function edit(int $id)
+    {
+        $proyecto = Project::find($id);
+
+        if (!$proyecto) {
+            return redirect()->route('projects.index')->with('error', "No existe un proyecto con id {$id}.");
+        }
+
+        return view('projects.edit', ['proyecto' => $proyecto]);
+    }
+
+    // Requerimiento 4 (parte 2): Procesa el formulario y actualiza el proyecto
+    public function update(Request $request, int $id)
+    {
+        $validado = $request->validate([
+            'nombre' => 'required|string|max:150',
+            'fecha_inicio' => 'required|date',
+            'estado' => 'required|string|max:50',
+            'responsable' => 'required|string|max:150',
+            'monto' => 'required|numeric|min:0',
+        ]);
+
+        $actualizado = Project::update($id, $validado);
+
+        if (!$actualizado) {
+            return redirect()->route('projects.index')->with('error', "No existe un proyecto con id {$id}.");
+        }
+
+        return redirect()->route('projects.index')->with('success', 'Proyecto actualizado correctamente.');
+    }
 }

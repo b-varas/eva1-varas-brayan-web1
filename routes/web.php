@@ -16,5 +16,11 @@ Route::get('/proyectos/crear', [ProjectController::class, 'create'])->name('proj
 // Requerimiento 2 (parte 2): Procesa el formulario y guarda el proyecto nuevo
 Route::post('/proyectos', [ProjectController::class, 'store'])->name('projects.store');
 
+// Requerimiento 4 (parte 1): Muestra el formulario con los datos del proyecto a editar   ← NUEVA
+Route::get('/proyectos/{id}/editar', [ProjectController::class, 'edit'])->name('projects.edit');
+
+// Requerimiento 4 (parte 2): Procesa el formulario y actualiza el proyecto               ← NUEVA
+Route::put('/proyectos/{id}', [ProjectController::class, 'update'])->name('projects.update');
+
 // Requerimiento 5: Obtener un proyecto por su id
 Route::get('/proyectos/{id}', [ProjectController::class, 'show'])->name('projects.show');
