@@ -10,6 +10,6 @@ class ProjectController extends Controller
     {
         $proyectos = Project::all();
 
-        dd($proyectos);
+        return view('projects.index', ['proyectos' => $proyectos]);
     }
 }

@@ -1,9 +1,15 @@
 <?php
 
 namespace App\Models;
+/**
+ * Modelo Project.
+ * No extiende de Eloquent Model porque el requerimiento pide
+ * datos estáticos (sin base de datos): los proyectos viven
+ * directamente en un array dentro de esta clase.
+ */
 
 class Project
-{
+{   // Datos estáticos iniciales de los proyectos (clave = id del proyecto)
     private static array $proyectos = [
         1 => [
             'id' => 1,
@@ -22,7 +28,7 @@ class Project
             'monto' => 3200000,
         ],
     ];
-
+        // Devuelve todos los proyectos (requerimiento: listar todos los proyectos)
         public static function all(): array
     {
         return self::$proyectos;
