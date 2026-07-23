@@ -3,6 +3,7 @@
 Evaluación sumativa Unidad 1 — Framework Web (Laravel 11 / PHP 8.3)
 
 Nombre del equipo: The IT Crowd
+
 Integrantes: Eduardo Palma - Luis Muñoz - Brayan Varas
 
 Aplicación web para la gestión de proyectos de Tech Solutions, desarrollada como caso de estudio para practicar los conceptos fundamentales de un framework MVC: rutas, controladores, modelos, vistas y componentes reutilizables.
