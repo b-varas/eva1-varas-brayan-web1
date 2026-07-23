@@ -106,4 +106,4 @@ Se incluye una única vez en el layout compartido, por lo que aparece en todas l
 
 ---
 
-Desarrollado por Brayan Varas — Evaluación Sumativa Unidad 1, Desarrollo Web con Framework.
+Desarrollado por Eduardo Palma - Luis Muñoz - Brayan Varas — Evaluación Sumativa Unidad 1, Desarrollo Web con Framework.
